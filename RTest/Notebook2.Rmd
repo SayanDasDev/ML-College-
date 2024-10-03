@@ -1,0 +1,60 @@
+---
+title: "NotebookSlide"
+author: "Sayan Das"
+date: "2024-10-03"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(reticulate)
+use_python("C:/Program Files/Python312/python.exe")
+```
+
+## Classification Classwork
+
+
+##### Importing Libraries 
+
+
+
+
+
+
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+
+#
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+fdsssssss
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
