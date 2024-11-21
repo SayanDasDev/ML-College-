@@ -1,0 +1,297 @@
+\documentclass[12pt]{report}
+\usepackage[top=1in, bottom=1in, left=0.5in, right=0.5in]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, ebgaramond-maths, enumerate, fancyhdr, xcolor, lipsum, titling, minted, algorithm, algpseudocode, algorithmicx, float, hyperref, booktabs}
+
+\usepackage[Glenn]{fncychap}
+\usepackage[skip=20pt, indent=30pt]{parskip}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage[some]{background}
+
+\definecolor{titlepagecolor}{cmyk}{.02,.04,0,.90}
+
+\DeclareFixedFont{\bigsf}{T1}{phv}{b}{n}{1.5cm}
+
+
+\makeatletter
+\renewcommand{\@chapapp}{Section}
+\makeatother
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\pagestyle{fancy}
+\fancyhead[l]{Final Project Report \\}
+\fancyhead[c]{Section \thechapter \\}
+\fancyhead[r]{Sayan Das: \texttt{B2430035} \\ Raihan Uddin: \texttt{B2430070}}
+\fancyfoot[c]{\thepage}
+\renewcommand{\headrulewidth}{0.2pt}
+\setlength{\headheight}{28pt}
+
+\title{Final Project Report}
+\author{
+  Sayan Das
+  \and
+  Raihan Uddin
+}
+
+\begin{document}
+
+\begin{titlepage}
+	\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+	\center
+
+
+	\textsc{\LARGE \textbf{Ramakrishna Mission Vivekananda Educational and Research Institute}}\\[1.5cm]
+
+	\textsc{\LARGE Machine Learning}\\[0.5cm]
+
+	\textsc{\large Final Project Report}\\[0.5cm]
+
+	\HRule\\[0.4cm]
+
+	{\huge\bfseries A Classification Based approach for predicting Smartphone Price Categories}\\[0.4cm]
+
+	\HRule\\[1.5cm]
+
+
+
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushleft}
+			\large
+			\textit{Submitted By}\\
+			\textsc{\textbf{Sayan Das }}\\
+			\vspace{-0.5em}
+			\textsc{\texttt{B2430035 }}\\
+			\textsc{\textbf{Raihan Uddin }}\\
+			\vspace{-0.5em}
+			\textsc{\texttt{B2430070} }\\
+		\end{flushleft}
+	\end{minipage}
+	~
+	\begin{minipage}{0.4\textwidth}
+		\begin{flushright}
+			\large
+			\textit{Submitted To}\\
+			\textbf{\textsc{Br. Bhaswarachaitanya (Tamal Maharaj)}}
+		\end{flushright}
+	\end{minipage}
+
+
+	\vfill\vfill\vfill
+
+	{\large November 25, 2024}
+
+	\vfill
+
+\end{titlepage}
+\restoregeometry
+
+\tableofcontents
+
+\chapter{Introduction}
+\section{Background}
+Now a days, mobile phones are more than just a means of communication. The global smartphone market is characterized by rapid technological innovation, intense competition, and increasingly sophisticated consumer expectations. With the proliferation of smartphones, the market dynamics have become increasingly complex, driven by continuous technological advancements, changing consumer preferences, and competitive pricing strategies.
+
+The smartphone industry represents a highly dynamic technological ecosystem where manufacturers constantly strive to differentiate their products through innovative features, design, and pricing. Each season, hundreds of new smartphones are launched, each targeting different market segments and consumer needs. This rapid evolution creates significant challenges for both manufacturers and consumers in understanding and predicting smartphone pricing.
+
+From a manufacturer's perspective, optimal pricing is crucial for maintaining market competitiveness and profitability. Pricing strategies must balance multiple factors including technological features, production costs, market positioning, and consumer purchasing power. Inaccurate pricing can lead to significant market share losses or reduced profit margins.
+
+For consumers, purchasing a smartphone requires understanding of the complex landscape of technical specifications, brand reputation, and market trends. The ability to predict or understand the factors influencing smartphone prices can help consumers make more informed purchasing decisions and assess the value proposition of different devices.
+
+The emergence of machine learning techniques offers promising approaches to address these pricing challenges. By leveraging historical data and advanced predictive modeling, it becomes possible to develop more sophisticated and accurate methods of smartphone price categorization and prediction.
+\section{Motivation}
+The motivation for this research stems from the increasingly complex and dynamic nature of the smartphone market. Several critical challenges drive the need for an advanced smartphone price categorization approach:
+\vspace{-1.25em}
+\begin{enumerate}
+	\setlength\itemsep{-1.05em}
+	\item{\textbf{Economic Significance for Manufacturers :}} Inaccurate pricing can result in significant financial losses or missed market opportunities.
+	\item{\textbf{Tranceparent Pricing for Consumers :}} Many consumers face challenges in understanding the intrinsic value of mobile phones. A data-driven approach to price categorization can provide transparent insights into the factors that genuinely influence mobile phone pricing.
+\end{enumerate}
+\section{Objectives}
+The primary objectives of this project are:
+\vspace{-1.25em}
+\begin{enumerate}
+	\setlength\itemsep{-1.05em}
+	\item{\textbf{Develop a Robust Classification Model :}}
+	      \vspace{-1.65em}
+	      \begin{itemize}
+		      \setlength\itemsep{-1.5em}
+		      \item Create a machine learning model capable of accurately categorizing smartphones into distinct price segments
+		      \item Achieve high predictive accuracy using multiple classification algorithms
+		      \item Identify and leverage the most significant features influencing smartphone pricing
+	      \end{itemize}
+	\item{\textbf{Feature Analysis and Selection :}}
+	      \vspace{-1.65em}
+	      \begin{itemize}
+		      \setlength\itemsep{-1.5em}
+		      \item Conduct comprehensive analysis of smartphone features
+		      \item Determine the most influential factors in price categorization
+		      \item Develop a systematic approach to feature selection and importance ranking
+	      \end{itemize}
+	\item{\textbf{Comparative Algorithm Performance :}}
+	      \vspace{-1.65em}
+	      \begin{itemize}
+		      \setlength\itemsep{-1.5em}
+		      \item Implement and evaluate multiple machine learning algorithms
+		      \item Compare the performance of different classification techniques
+		      \item Identify the most effective algorithm for smartphone price category prediction
+	      \end{itemize}
+	\item{\textbf{Practical Applicability :}}
+	      \vspace{-1.65em}
+	      \begin{itemize}
+		      \setlength\itemsep{-1.5em}
+		      \item Demonstrate the practical utility of the developed model for both manufacturers and consumers
+	      \end{itemize}
+	\item{\textbf{Methodological Contribution :}}
+	      \vspace{-1.65em}
+	      \begin{itemize}
+		      \setlength\itemsep{-1.5em}
+		      \item Develop a systematic approach to smartphone price categorization
+		      \item Contribute to the existing body of knowledge in machine learning applications in market analysis
+		      \item Establish a replicable methodology for similar predictive modeling challenges
+	      \end{itemize}
+\end{enumerate}
+
+\chapter{Literature Review}
+\begin{quotation}
+  In this paper \cite{asim2018} the authors investigate price class prediction for smartphones using machine learning, focusing on determining whether a mobile phone is economical or expensive. Data was collected from GSMArena, including features like display size, weight, RAM, and battery capacity. The dataset was preprocessed and categorized into four price classes: very economical, economical, expensive, and very expensive. Feature selection methods like InfoGain and WrapperAttributeEval were employed to reduce dataset dimensionality, optimizing computational efficiency. The study tested classifiers such as Decision Tree (J48) and Naïve Bayes, achieving a maximum accuracy of 78\% with Decision Tree when combined with WrapperAttributeEval. Challenges included converting a regression problem into classification, which introduced errors, and the limited dataset size impacting accuracy. The paper concludes with recommendations for improved feature selection techniques, larger datasets, and extending the model for other product categories.
+\end{quotation}
+
+\begin{quotation}
+  Chandrashekhara et al. \cite{chandrashekhara2019} 2019, focuses on predicting smartphone prices using machine learning techniques like Support Vector Regression (SVR), Backpropagation Neural Network (BNN), and Multiple Linear Regression (MLR). The dataset included features such as brand, RAM, memory, battery power, and display size, with 262 records spanning 2010–2018, sourced from e-commerce platforms. Data preprocessing steps included handling missing values, standardizing formats, and splitting the data into training (80\%) and testing (20\%) sets. Performance metrics such as R-squared and correlation values were used to evaluate models. SVR performed the best with an R-squared of 0.86 and correlation of 0.93. Graphical analyses demonstrated that SVR had the most accurate predictions, followed by BNN and MLR. The authors highlight the potential of SVR for broader applications in price prediction across retail industries, suggesting scalability through distributed systems like Hadoop.
+\end{quotation}
+
+\begin{quotation}
+  Ercan \& Şimşek \cite{ercan2023} examines the classification of mobile phone prices into low, medium, high, and very high categories using a Kaggle dataset with 2000 entries and 20 features. Features included physical attributes (weight, dimensions), performance metrics (RAM, processor cores), and functionalities (3G, Wi-Fi). Four machine learning algorithms—Logistic Regression, Support Vector Machine (SVM), Decision Tree, and K-Nearest Neighbors (KNN)—were applied and evaluated. SVM achieved the highest accuracy (96.16\%), outperforming Logistic Regression (91\%), Decision Tree (82\%), and KNN (41\%). Confusion matrices and performance metrics (accuracy, precision, recall, and F1-score) were used to validate results. The study emphasizes the superiority of SVM for this classification problem and suggests exploring additional algorithms and datasets for improved accuracy in future work.
+\end{quotation}
+
+\begin{quotation}
+  In another study \cite{abbasi2024} the author focuses on predicting the price of second-hand electronic devices, particularly smartphones, using machine learning (ML) techniques. It addresses the growing trend of buying used electronics, driven by economic factors and technological advancements. The authors utilized web scraping to gather a dataset covering the last five years, containing various features influencing smartphone prices. They experimented with three ML algorithms—Random Forest, Linear Regression, and Multi-Layer Perceptron—to develop a predictive model. Performance evaluation was based on metrics like Absolute Percentage Difference (APD) and Root Mean Square Error (RMSE). Random Forest emerged as the best-performing model, demonstrating the lowest prediction error and superior generalization. The study highlights how accurate price prediction can aid both buyers and sellers, making the market more efficient. Data preprocessing and feature selection were critical steps, leading to a dataset with 24 variables. Techniques like 10-fold cross-validation were used to ensure robustness. The findings suggest that incorporating modern ML methods can significantly enhance price prediction accuracy compared to traditional approaches.
+\end{quotation}
+
+\begin{quotation}
+  In this paper  Akash Gupta, and Suhasini Kottur \cite{gupta2020} explore mobile price prediction using machine learning, aiming to categorize mobile phones as economical or expensive based on their features. The study emphasizes the relevance of predictive modeling in aiding marketing and consumer decision-making. Key features considered include processor type, battery capacity, memory, and screen size. The authors employed algorithms like Linear Regression and K-Nearest Neighbors (KNN) to build predictive models. The seven-step machine learning process involved data gathering, preparation, model selection, training, evaluation, hyperparameter tuning, and prediction. The KNN model showed higher accuracy compared to Linear Regression, particularly in scenarios involving complex, non-linear relationships. The research demonstrated the importance of feature selection to reduce computational complexity and enhance prediction precision. The conclusion underscores the impact of ML-driven price prediction in optimizing marketing strategies and enhancing business decisions.
+\end{quotation}
+
+\begin{quotation}
+  Finally, this paper \cite{kumuda2021} investigates the prediction of mobile phone prices using machine learning, with a focus on market analysis and consumer behavior. The study outlines the challenges of determining accurate mobile prices due to diverse features and competitive market dynamics. A dataset containing information on screen size, memory, camera quality, and battery was used to train predictive models. Key algorithms employed included KNN, Forward Selection, and Backward Selection to manage data complexity and optimize feature selection. The data collection phase involved gathering specifications from various mobile phones to construct a comprehensive dataset. The authors emphasized the role of data visualization techniques, like the Elbow Method, to identify the optimal number of features. The study presented a detailed analysis of feature importance, highlighting key parameters influencing price prediction. Classification and testing phases assessed the model's accuracy, using preprocessed datasets for training and evaluation. Results were visualized using graphs that compared predicted prices against specifications like RAM and memory. The conclusion suggests that precise feature selection can improve predictive accuracy and aid in product launch decisions.
+\end{quotation}
+
+
+\chapter{Dataset Description}
+\section{Source}
+The dataset for this mobile price classification project was obtained from Kaggle, a prominent platform for data science and machine learning datasets.\\ \\
+Link - \href{https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification?select=train.csv}{https://www.kaggle.com/datasets/iabhishekofficial/mobile-price-classification}\\ \\
+The dataset is publicly available and contains 2000 mobile phone entries with 20 feature variables and a target variable representing price range.
+\section{Features}
+The dataset comprises 20 features that describe various characteristics of mobile phones. Each feature provides critical information about the smartphone's specifications. Following table provides a detailed breakdown of these features:
+\begin{table}[H]
+	\begin{tabular}{ll}
+		\toprule
+		\textbf{Feature Name}   & \textbf{Description}                                            \\
+		\toprule
+		\textbf{battery\_power} & battery capacity in mAh                                         \\
+		\midrule
+		\textbf{blue}           & has bluetooth or not                                            \\
+		\midrule
+		\textbf{clock\_speed}   & speed at which processor executes instructions                  \\
+		\midrule
+		\textbf{dual\_sim}      & has dual sim support or not                                     \\
+		\midrule
+		\textbf{fc}             & front Camera Megapixels                                         \\
+		\midrule
+		\textbf{four\_g}        & has 4G or not                                                   \\
+		\midrule
+		\textbf{int\_memory}    & internal Memory capacity                                        \\
+		\midrule
+		\textbf{m\_dep}         & mobile Depth in cm                                              \\
+		\midrule
+		\textbf{mobile\_wt}     & weight of mobile phone                                          \\
+		\midrule
+		\textbf{n\_cores}       & number of cores in processor                                    \\
+		\midrule
+		\textbf{pc}             & primary Camera Megapixels                                       \\
+		\midrule
+		\textbf{px\_height}     & pixel Resolution Height                                         \\
+		\midrule
+		\textbf{px\_width}      & pixel Resolution Width                                          \\
+		\midrule
+		\textbf{ram}            & RAM in MB                                                       \\
+		\midrule
+		\textbf{touch\_screen}  & has touch screen or not                                         \\
+		\midrule
+		\textbf{wifi}           & has wifi or not                                                 \\
+		\midrule
+		\textbf{sc\_h}          & screen Height in cm                                             \\
+		\midrule
+		\textbf{sc\_w}          & screen Width in cm                                              \\
+		\midrule
+		\textbf{talk\_time}     & longest time that a single battery charge will last over a call \\
+		\midrule
+		\textbf{three\_g}       & has 3G or not                                                   \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+\section{Target Variable}
+The target variable, price\_range, represents the categorization of mobile phones into different price segments. It is a categorical variable with four distinct classes:
+\vspace{-1.25em}
+\begin{itemize}
+	\setlength\itemsep{-1.05em}
+	\item{\texttt{0 :}} Low-cost mobile phones
+	\item{\texttt{1 :}} Medium-low cost mobile phones
+	\item{\texttt{2 :}} Medium-high cost mobile phones
+	\item{\texttt{3 :}} High-end, premium mobile phones
+\end{itemize}
+
+\chapter{Data Preprocessing}
+
+\chapter{Methodology}
+\section{Algorithms Used}
+\section{Justification}
+
+\chapter{Implementation}
+\section{Tools and Libraries}
+\section{Parameters}
+\section{Training Process}
+
+\chapter{Results}
+\section{Evaluation Metrics}
+\section{Comparison between different Models}
+
+\chapter{Discussion}
+\section{Analysis of Results}
+\section{Anomalies}
+\section{Limitations}
+
+\chapter{Conclusion}
+\section{Summary}
+\section{Reflection on Objectives}
+\section{Future Work}
+
+\renewcommand{\bibname}{References}
+\begin{thebibliography}{9}
+	\bibitem{hadsonml}
+	Géron, Aurélien. \textit{Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow}. 3rd ed., O'Reilly Media, 2023.
+
+	\bibitem{asim2018}
+	Asim, Muhammad, and Zafar Khan. "Mobile Price Class Prediction Using Machine Learning Techniques." \textit{International Journal of Computer Applications}, March 2018. DOI: \texttt{10.5120/ijca2018916555}.
+
+	\bibitem{chandrashekhara2019}
+	Chandrashekhara, K. T., and M. Thungamani. "Smartphone Price Prediction in Retail Industry Using Machine Learning Techniques." In \textit{Emerging Research in Electronics, Computer Science and Technology, Lecture Notes in Electrical Engineering 545}, edited by V. Sridhar et al., Springer Nature Singapore Pte Ltd., 2019. DOI: \texttt{10.1007/978-981-13-5802-9\_34}.
+
+	\bibitem{ercan2023}
+	Ercan \&  Şimşek, "Mobile Phone Price Classification Using Machine Learning." \textit{International Journal of Advanced Natural Sciences and Engineering Researches}, vol. 7, no. 4, 2023, pp. 458-462. DOI: \texttt{10.59287/ijanser.791}.
+
+	\bibitem{abbasi2024}
+	Abbasi, Muhammad Hasnain, Abdul Sajid, Muhammad Arshad Awan, and Ayeb Amani. "Predicting The Price Of Used Electronic Devices Using Machine Learning Techniques." \textit{International Journal of Computing and Related Technologies}, vol. 4, no. 1, 2024. Available at: \texttt{https://www.researchgate.net/publication/377526585}.
+
+	\bibitem{gupta2020}
+	Gupta, Akash, and Suhasini Kottur. "Mobile Price Prediction by Its Features Using Predictive Model of Machine Learning." \textit{UGC Care Journal}, August 2020. DOI: \texttt{10.13140/RG.2.2.20054.52800}.
+
+	\bibitem{kumuda2021}
+	Kumuda S, Vishal Karur, and Karthick Balaje S. E. "Prediction of Mobile Model Price Using Machine Learning Techniques." \textit{International Journal of Engineering and Advanced Technology (IJEAT)}, vol. 11, no. 1, October 2021. DOI: \texttt{10.35940/ijeat.A3219.1011121}.
+
+\end{thebibliography}
+\addcontentsline{toc}{chapter}{References}
+
+\end{document}
